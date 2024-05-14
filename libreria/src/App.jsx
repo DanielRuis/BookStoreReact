@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+import Header from './Header';
+import Contenido from './Contenido';
+import DialogoNuevo from './DialogoNuevo';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [stateNuevo, setStateNuevo] = useState(false);
+  const [stateType, setStateType] = useState(1);
+  const [error, setError] = useState(false);
+  const [reloadEstudiantes, setRE] = useState(false);
+  const [matricula, setMatricula] = useState("");
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <DialogoNuevo
+        stateNuevo={stateNuevo}
+        setStateNuevo={setStateNuevo}
+        type={stateType}
+        setRE={setRE}
+        matriculaValue={matricula}
+      />
+      <div className='contenedor'>
+        <Header setShow={setError} />
+        <Contenido
+         setStateNuevo={setStateNuevo} 
+         setStateType={setStateType} 
+         error={error}
+         reloadEstudiantes={reloadEstudiantes}
+         setRE={setRE}
+         setMatricula={setMatricula}
+         />
+        
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
